@@ -33,16 +33,35 @@ def prime_integer_summation() -> int:
 
 
 def factorial(number: int) -> int:
-    return 0
+    produit = 1
+    for n in range(1,number+1,1):
+        produit *= n
+    return produit
 
 
 def use_continue() -> None:
-    pass
+    for n in range(1,11):
+        if n == 5: continue
+        print (n)
 
 
 def verify_ages(groups: List[List[int]]) -> List[bool]:
-    return []
+    groupes_acceptes = []
+    for groupe in groups:
+        groupes_acceptes.append(True)
+        
+        if 10 < len(groupe) or len(groupe) < 3: groupes_acceptes[groups.index(groupe)]= False
 
+        for a in groupe:
+            if a == 25: continue
+            if a < 18: groupes_acceptes[groups.index(groupe)]= False
+            if a > 70:
+                for b in groupe:
+                    if b == 50: groupes_acceptes[groups.index(groupe)]= False
+        
+    return groupes_acceptes
+#pourquoi les groupes 6 et 7 retournent faux dans la version prof 
+# meme si ils correspondent au critere de taille et contiennent un membre de 25 ans??
 
 def main() -> None:
     number = -4.325
@@ -64,8 +83,14 @@ def main() -> None:
               [13, 25, 80, 15], [20, 30, 40, 50, 60], [75, 50, 100, 28]
     ]
     print(f"Les différents groupes sont: {groups}")
-    print(f"L'acceptance des groupes est: {verify_ages(groups)}")
-
+    print(f"L'acceptance des groupes est: {verify_ages(groups)} \nEt donc:")
+    group_num = 1
+    for g in (verify_ages(groups)):
+        if g:
+            acceptance = "Accepté"
+        else: acceptance = "Refusé"
+        print (f"    {group_num}. {acceptance}")
+        group_num += 1
 
 if __name__ == '__main__':
     main()
